@@ -1,53 +1,34 @@
-import  express  from 'express'
+import express from 'express';
+import courseRoutes from './routes/course.routes';
 
 const app = express();
+
 app.use(express.json());
 
-const PORT = process.env.PORT || 3000
+app.use('/courses', courseRoutes);
 
-interface Course {
-  id: number;
-  title: string;
-  capacity: number;
-}
+const PORT = process.env.PORT || 3000;
 
-const courses: Course[] = [
-  { id: 1, title: 'Programacion V', capacity: 17 },
-  { id: 2, title: 'Calculo', capacity: 40 },
-  { id: 3, title: 'Computacion en la nube', capacity: 25 },
-  { id: 4, title: 'Ingles', capacity: 60 }
-];
-
-app.get('/',(req, res) => {
-  res.status(200).json({ status: 'El servidor esta funcionando correctamente' })
+app.get('/', (req, res) => {
+  res.status(200).json({
+    status: 'El servidor esta funcionando correctamente'
+  });
 });
 
-app.get('/health',(req, res) => {
-  res.status(200).json({ status: 'ok' })
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    status: 'ok'
+  });
 });
 
-app.get('/objetos',(req, res) => {
-  
+app.get('/alumnos', (req, res) => {
   res.status(200).json([
-    {id:1, nombre: 'Computador', cantidad: 5},
-    {id:2, nombre: 'Proyector', cantidad: 2},
-    {id:3, nombre: 'Silla', cantidad: 20},
-  ])
-});
-  app.get('/courses', (req, res) => {
-  res.status(200).json(courses);
-});
-app.get('/courses/:id', (req, res) => {
-  const id = Number(req.params.id);
-  const course = courses.find(c => c.id === id);
-
-  if (!course){
-    return res.status(404).json({error: 'Curso no encontrado'});
-  }
-
-  res.status(200).json(course);
+    { id: 1, nombre: 'Juan', apellido: 'Perez', edad: 20 },
+    { id: 2, nombre: 'Maria', apellido: 'Gomez', edad: 22 },
+    { id: 3, nombre: 'Pedro', apellido: 'Lopez', edad: 21 }
+  ]);
 });
 
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`)
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
