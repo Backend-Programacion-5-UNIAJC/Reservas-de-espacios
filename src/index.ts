@@ -27,13 +27,16 @@ app.get('/health',(req, res) => {
 });
 
 app.get('/objetos',(req, res) => {
+  
   res.status(200).json([
     {id:1, nombre: 'Computador', cantidad: 5},
     {id:2, nombre: 'Proyector', cantidad: 2},
     {id:3, nombre: 'Silla', cantidad: 20},
   ])
 });
-  
+  app.get('/courses', (req, res) => {
+  res.status(200).json(courses);
+});
 app.get('/courses/:id', (req, res) => {
   const id = Number(req.params.id);
   const course = courses.find(c => c.id === id);
