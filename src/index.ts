@@ -28,9 +28,9 @@ app.get('/health',(req, res) => {
 
 app.get('/alumnos',(req, res) => {
   res.status(200).json([  
-  {id:1, nombre: 'Juan', apellido: 'Perez', edad: 20},
-  {id:2, nombre: 'Maria', apellido: 'Gomez', edad: 22},
-  {id:3, nombre: 'Pedro', apellido: 'Lopez', edad: 21},
+  {id:1, nombre: 'Javier', apellido: 'Angulo', edad: 34},
+  {id:2, nombre: 'pedro', apellido: ' Carmona', edad: 19},
+  {id:3, nombre: 'Jerson', apellido: 'Estupiñan', edad: 43},
 ])
 });
   
