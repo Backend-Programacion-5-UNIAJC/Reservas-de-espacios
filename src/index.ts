@@ -26,12 +26,12 @@ app.get('/health',(req, res) => {
   res.status(200).json({ status: 'ok' })
 });
 
-app.get('/alumnos',(req, res) => {
-  res.status(200).json([  
-  {id:1, nombre: 'Javier', apellido: 'Angulo', edad: 34},
-  {id:2, nombre: 'pedro', apellido: ' Carmona', edad: 19},
-  {id:3, nombre: 'Jerson', apellido: 'Estupiñan', edad: 43},
-])
+app.get('/objetos',(req, res) => {
+  res.status(200).json([
+    {id:1, nombre: 'Computador', cantidad: 5},
+    {id:2, nombre: 'Proyector', cantidad: 2},
+    {id:3, nombre: 'Silla', cantidad: 20},
+  ])
 });
   
 app.get('/courses/:id', (req, res) => {
