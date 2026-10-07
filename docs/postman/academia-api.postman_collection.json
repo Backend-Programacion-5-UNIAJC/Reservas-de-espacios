@@ -62,6 +62,46 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Obtener Instructor por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/instructors/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"instructors",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Instructor no encontrado (404)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/instructors/999",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"instructors",
+						"999"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

@@ -1,11 +1,13 @@
 import express from 'express';
 import courseRoutes from './routes/course.routes';
+import instructorRoutes from './routes/instructor.routes';
 
 const app = express();
 
 app.use(express.json());
 
 app.use('/courses', courseRoutes);
+app.use('/instructors', instructorRoutes);
 
 const PORT = process.env.PORT || 3000;
 
