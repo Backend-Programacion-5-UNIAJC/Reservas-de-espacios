@@ -3,14 +3,12 @@ import courseRoutes from './routes/course.routes';
 import instructorRoutes from './routes/instructor.routes';
 
 const app = express();
-
-app.use(express.json());
-
-app.use('/courses', courseRoutes);
-app.use('/instructors', instructorRoutes);
-
 const PORT = process.env.PORT || 3000;
 
+// 1. El parser de JSON SIEMPRE debe ir primero
+app.use(express.json());
+
+// 2. Ruta raíz y de salud
 app.get('/', (req, res) => {
   res.status(200).json({
     status: 'El servidor esta funcionando correctamente'
@@ -23,6 +21,11 @@ app.get('/health', (req, res) => {
   });
 });
 
+// 3. Tus rutas de entidades (Courses e Instructors)
+app.use('/courses', courseRoutes);
+app.use('/instructors', instructorRoutes);
+
+// Ruta adicional de alumnos si la quieres conservar
 app.get('/alumnos', (req, res) => {
   res.status(200).json([
     { id: 1, nombre: 'Juan', apellido: 'Perez', edad: 20 },
@@ -33,4 +36,4 @@ app.get('/alumnos', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+});    
