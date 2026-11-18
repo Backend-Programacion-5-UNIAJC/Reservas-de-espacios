@@ -1,17 +1,43 @@
 import { Request, Response } from 'express';
-import { instructors } from '../data/instructors';
+import * as instructorRepo from '../repositories/instructor.repository';
 
-export const getAllInstructors = (req: Request, res: Response) => {
-  return res.status(200).json(instructors);
+export const getInstructors = async (_req: Request, res: Response) => {
+  const instructors = await instructorRepo.getAllInstructors();
+  res.json(instructors);
 };
 
-export const getInstructorById = (req: Request, res: Response) => {
+export const getInstructorById = async (req: Request, res: Response) => {
   const id = Number(req.params.id);
-  const instructor = instructors.find((item) => item.id === id);
+  const instructor = await instructorRepo.getInstructorById(id);
+  if (!instructor) return res.status(404).json({ message: 'Instructor no encontrado' });
+  res.json(instructor);
+};
 
-  if (!instructor) {
-    return res.status(404).json({ error: 'Instructor no encontrado' });
+export const createInstructor = async (req: Request, res: Response) => {
+  try {
+    const newInstructor = await instructorRepo.createInstructor(req.body);
+    res.status(201).json(newInstructor);
+  } catch (error) {
+    res.status(400).json({ message: 'Error al crear instructor', error });
   }
+};
 
-  return res.status(200).json(instructor);
+export const updateInstructor = async (req: Request, res: Response) => {
+  try {
+    const id = Number(req.params.id);
+    const updated = await instructorRepo.updateInstructor(id, req.body);
+    res.json(updated);
+  } catch (error) {
+    res.status(404).json({ message: 'No se pudo actualizar el instructor' });
+  }
+};
+
+export const deleteInstructor = async (req: Request, res: Response) => {
+  try {
+    const id = Number(req.params.id);
+    await instructorRepo.deleteInstructor(id);
+    res.status(204).send();
+  } catch (error) {
+    res.status(404).json({ message: 'No se pudo eliminar el instructor' });
+  }
 };

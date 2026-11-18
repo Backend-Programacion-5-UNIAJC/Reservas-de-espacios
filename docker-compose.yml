@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: postgres_academia
+    environment:
+      POSTGRES_USER: postgres       # Aquí puedes definir tu usuario
+      POSTGRES_PASSWORD: password123 # Aquí puedes definir tu contraseña
+      POSTGRES_DB: Academia_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

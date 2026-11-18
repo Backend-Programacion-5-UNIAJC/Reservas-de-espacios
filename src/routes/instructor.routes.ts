@@ -1,9 +1,18 @@
 import { Router } from 'express';
-import { getAllInstructors, getInstructorById } from '../controllers/instructor.controller';
+import {
+  getInstructors,
+  getInstructorById,
+  createInstructor,
+  updateInstructor,
+  deleteInstructor,
+} from '../controllers/instructor.controller';
 
 const router = Router();
 
-router.get('/', getAllInstructors);
+router.get('/', getInstructors);
 router.get('/:id', getInstructorById);
+router.post('/', createInstructor);
+router.put('/:id', updateInstructor);
+router.delete('/:id', deleteInstructor);
 
 export default router;
