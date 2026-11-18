@@ -1,6 +1,8 @@
 import express from 'express';
 import courseRoutes from './routes/course.routes';
 import instructorRoutes from './routes/instructor.routes';
+import spaceRoutes from './routes/space.routes';
+import reservationRoutes from './routes/reservation.routes';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,9 +23,11 @@ app.get('/health', (req, res) => {
   });
 });
 
-// 3. Tus rutas de entidades (Courses e Instructors)
+// 3. Tus rutas de entidades (Courses, Instructors, Spaces y Reservations)
 app.use('/courses', courseRoutes);
 app.use('/instructors', instructorRoutes);
+app.use('/spaces', spaceRoutes);
+app.use('/reservations', reservationRoutes); // <-- ¡Aquí está integrada la ruta de reservas!
 
 // Ruta adicional de alumnos si la quieres conservar
 app.get('/alumnos', (req, res) => {
@@ -36,4 +40,4 @@ app.get('/alumnos', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});    
+});
